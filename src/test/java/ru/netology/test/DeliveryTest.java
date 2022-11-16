@@ -36,18 +36,20 @@ class DeliveryTest {
         $x("//input[@name='phone']").val(validUser.getPhone());
         $x("//label[@data-test-id='agreement']").click();
         $x("//*[text()='Запланировать']").click();
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно запланирована на  " + firstMeetingDate), Duration.ofSeconds(15))
+                .shouldBe(visible);
+
         $x("//*[contains(@class, 'notification__closer')]").click();
         $x("//*[@data-test-id='date']//input[@class='input__control']")
                 .sendKeys(Keys.CONTROL + "A", Keys.BACK_SPACE);
         $x("//*[@data-test-id='date']//input[@class='input__control']").val(secondMeetingDate);
         $x("//*[text()='Запланировать']").click();
         $x("//*[text()='Перепланировать']").click();
-
         $x("//div[@data-test-id='success-notification']").should(visible, Duration.ofSeconds(15));
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на  " + secondMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(visible);
-
     }
 }
 

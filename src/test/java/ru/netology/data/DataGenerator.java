@@ -52,8 +52,6 @@ public class DataGenerator {
     }
 
     @Value
-    @Data
-    @RequiredArgsConstructor
     public static class UserInfo {
         String city;
         String name;
